@@ -18,6 +18,14 @@ export default class MediaControlCustomPlugin extends Clappr.UIContainerPlugin {
 		const container = document.createElement('div');
 		container.classList.add('media-container');
 
+		const topElem = document.createElement('div');
+		topElem.classList.add('top-elem');
+
+		const time = this.buttonTime();
+		const titleEl = this.buttonTitle('Это точно не то о чем ты подумал');
+
+		topElem.append(titleEl, time);
+
 		const progress = this.buttonProgress();
 
 		const controls = document.createElement('div');
@@ -39,7 +47,7 @@ export default class MediaControlCustomPlugin extends Clappr.UIContainerPlugin {
 		rightControls.append(volume, fullscreen);
 
 		controls.append(leftControls, rightControls);
-		container.append(progress, controls);
+		container.append(topElem, progress, controls);
 		this.container.$el.append(container);
 		return this;
 	}
@@ -192,5 +200,48 @@ export default class MediaControlCustomPlugin extends Clappr.UIContainerPlugin {
 		});
 
 		return progressContainer;
+	}
+
+	buttonTime() {
+		const timeContainer = document.createElement('div');
+		timeContainer.classList.add('media-time');
+
+		const playback = this.container?.playback;
+		if (!playback) {
+			timeContainer.innerText = '00:00 / 00:00';
+			return timeContainer;
+		}
+
+		const formatTime = (seconds) => {
+			const mins = Math.floor(seconds / 60)
+				.toString()
+				.padStart(2, '0');
+			const secs = Math.floor(seconds % 60)
+				.toString()
+				.padStart(2, '0');
+			return `${mins}:${secs}`;
+		};
+
+		const updateTime = () => {
+			const current = playback.getCurrentTime ? playback.getCurrentTime() : 0;
+			const duration = playback.getDuration ? playback.getDuration() : 0;
+			timeContainer.innerText = `${formatTime(current)} / ${formatTime(duration)}`;
+		};
+
+		// Слушаем события плеера
+		this.listenTo(playback, 'playback:timeupdate', updateTime);
+		this.listenTo(playback, 'playback:seek', updateTime);
+		this.listenTo(playback, 'playback:ready', updateTime); // чтобы сразу показать длительность
+
+		return timeContainer;
+	}
+
+	buttonTitle(titleText = '') {
+		const titleEl = document.createElement('div');
+		titleEl.classList.add('media-title');
+
+		titleEl.innerText = titleText;
+
+		return titleEl;
 	}
 }
