@@ -1,6 +1,8 @@
 import Clappr from 'clappr';
 import {
-	FullscreenPlugin,
+	DoubleClickFullscreenDisablePlugin,
+	DoubleClickRewindPlugin,
+	CancelFullscreenOnIosPlugin,
 	MediaControlCustomPlugin,
 	StartPlayerIconPlugin,
 } from './plugins/index.js';
@@ -9,7 +11,13 @@ import {
 const player = new Clappr.Player({
 	source: 'https://samplelib.com/lib/preview/mp4/sample-30s.mp4',
 	parentId: '#player',
-	plugins: [FullscreenPlugin, MediaControlCustomPlugin, StartPlayerIconPlugin],
+	plugins: [
+		CancelFullscreenOnIosPlugin,
+		MediaControlCustomPlugin,
+		StartPlayerIconPlugin,
+		DoubleClickFullscreenDisablePlugin,
+		DoubleClickRewindPlugin,
+	],
 	mediacontrol: false, // отключаем стандартный контрол
 	hideMediaControl: false, // можно убрать
 	autoPlay: false,

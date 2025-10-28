@@ -1,4 +1,4 @@
-// plugins/media-control-custom/controls/fullscreen.js
+// plugins/media-control-custom/controls/cancel-fullscreen-on-ios.js
 import { createButton } from '../../../utils/create-button.js';
 
 export const createFullscreen = (container) => {
