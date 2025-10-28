@@ -3,20 +3,33 @@ import { createButton } from '../../../utils/create-button.js';
 
 export const createFullscreen = (container) => {
 	const btn = createButton('./img/icons/FullScreen.svg');
-	const playback = container?.playback;
-	if (!playback) return btn;
+	if (!container) return btn;
+
+	const playback = container.playback;
+	const video = playback?.el;
+	const playerRoot = container.core?.el || container.$el?.get(0);
+	const target = playerRoot || video;
+
+	const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
 	btn.addEventListener('click', (e) => {
 		e.stopPropagation();
-		const video = playback.el;
-		if (!video) return;
 
+		// ✅ Safari / iOS
+		if (isIOS && video && video.webkitEnterFullscreen) {
+			video.webkitEnterFullscreen();
+			return;
+		}
+
+		// ✅ Остальные браузеры
 		if (document.fullscreenElement) {
 			document.exitFullscreen();
-		} else if (video.requestFullscreen) {
-			video.requestFullscreen();
-		} else if (video.webkitEnterFullscreen) {
-			video.webkitEnterFullscreen();
+		} else if (target.requestFullscreen) {
+			target.requestFullscreen().catch((err) => {
+				console.warn('Fullscreen error:', err);
+				// fallback для Safari старых версий
+				if (video?.webkitEnterFullscreen) video.webkitEnterFullscreen();
+			});
 		}
 	});
 
