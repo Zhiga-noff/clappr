@@ -1,6 +1,6 @@
 import Clappr from 'clappr';
 
-export default class StartPlayerIconPlugin extends Clappr.UIContainerPlugin {
+export class StartPlayerIconPlugin extends Clappr.UIContainerPlugin {
 	get name() {
 		return 'start_player_icon';
 	}

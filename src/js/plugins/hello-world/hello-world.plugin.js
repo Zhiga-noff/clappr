@@ -1,6 +1,6 @@
 import Clappr from 'clappr';
 
-export default class HelloWorldPlugin extends Clappr.UIContainerPlugin {
+export class HelloWorldPlugin extends Clappr.UIContainerPlugin {
 	get name() {
 		return 'hello_world_plugin';
 	}

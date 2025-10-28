@@ -1,6 +1,6 @@
 import Clappr from 'clappr';
 
-export default class FullscreenPlugin extends Clappr.UIContainerPlugin {
+export class FullscreenPlugin extends Clappr.UIContainerPlugin {
 	get name() {
 		return 'fullscreen_plugin';
 	}
