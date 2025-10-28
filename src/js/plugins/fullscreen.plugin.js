@@ -2,7 +2,7 @@ import Clappr from 'clappr';
 
 export default class FullscreenPlugin extends Clappr.UIContainerPlugin {
 	get name() {
-		return 'no_fullscreen_plugin';
+		return 'fullscreen_plugin';
 	}
 
 	bindEvents() {

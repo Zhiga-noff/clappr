@@ -20,7 +20,13 @@ export default class HelloWorldPlugin extends Clappr.UIContainerPlugin {
 		helloElement.innerText = 'Hello World';
 		helloElement.classList.add('hello');
 
+		this._el = helloElement;
 		this.container.$el.append(helloElement);
 		return this;
+	}
+
+	disable() {
+		if (this._el && this._el.parentNode) this._el.parentNode.removeChild(this._el);
+		super.disable && super.disable();
 	}
 }
