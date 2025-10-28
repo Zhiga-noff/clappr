@@ -1,0 +1,18 @@
+@import 'src/scss/nullstyle';
+@import 'src/scss/colors';
+@import 'src/scss/fonts';
+
+html {
+  //overflow-y: hidden;
+  overflow-x: hidden ;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 130%;
+  color: $text;
+  background-color: $back;
+  overflow-x: hidden;
+}
+
