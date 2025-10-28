@@ -16,47 +16,56 @@ export class MediaControlCustomPlugin extends Clappr.UIContainerPlugin {
 	}
 
 	bindEvents() {
-		this.listenTo(this.container, 'container:ready', this.render);
+		this.listenTo(this.container, 'container:ready', () => {
+			this.render();
+		});
 	}
 
-	render = () => {
-		if (!this.container || this._controls) return this;
+	render() {
+		if (!this.container) return this;
+		if (this._controls) return this; // защита от дубликатов
 
-		this._controls = document.createElement('div');
-		this._controls.classList.add('media-container');
-		this._controls.addEventListener('click', (e) => e.stopPropagation());
+		// Создаём контейнер для кнопок
+		const container = document.createElement('div');
+		container.addEventListener('click', (e) => e.stopPropagation());
+		container.classList.add('media-container');
 
-		// Верзняя часть вместе с именем и временем
-		const top = document.createElement('div');
-		top.classList.add('top-elem');
+		const topElem = document.createElement('div');
+		topElem.classList.add('top-elem');
 
-		const title = createTitle('Это точно не то о чем ты подумал');
 		const time = createTime(this.container);
-		top.append(title, time);
+		const titleEl = createTitle('Это точно не то о чем ты подумал');
+
+		topElem.append(titleEl, time);
 
 		// Прогресс бар
 		const progress = createProgressBar(this.container);
 
-		// Кнопки паузы перемотки и полного экрана с мьютом
+		// Контейнер кнопок снизу
 		const controls = document.createElement('div');
 		controls.classList.add('media-controls');
 
-		const left = document.createElement('div');
-		left.classList.add('media-left');
-		left.append(
-			createPlayPause(this.container),
-			createBackward(this.container),
-			createForward(this.container),
-		);
+		// Кнопки паузы и перемотки
+		const leftControls = document.createElement('div');
+		leftControls.classList.add('media-left');
 
-		const right = document.createElement('div');
-		right.classList.add('media-right');
-		right.append(createMute(this.container), createFullscreen(this.container));
+		const playPause = createPlayPause(this.container);
+		const forward = createForward(this.container);
+		const backward = createBackward(this.container);
+		leftControls.append(playPause, backward, forward);
 
-		controls.append(left, right);
-		this._controls.append(top, progress, controls);
-		this.container.$el.append(this._controls);
+		// Кнопки во весь экран и мьют
+		const rightControls = document.createElement('div');
+		rightControls.classList.add('media-right');
 
+		const fullscreen = createFullscreen(this.container);
+		const volume = createMute(this.container);
+		rightControls.append(volume, fullscreen);
+
+		// Добавляем все эелементы
+		controls.append(leftControls, rightControls);
+		container.append(topElem, progress, controls);
+		this.container.$el.append(container);
 		return this;
-	};
+	}
 }

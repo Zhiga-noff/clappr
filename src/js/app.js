@@ -13,6 +13,8 @@ const player = new Clappr.Player({
 	mediacontrol: false, // отключаем стандартный контрол
 	hideMediaControl: false, // можно убрать
 	autoPlay: false,
+	width: '100%', // важно — чтобы плеер подчинялся контейнеру
+	height: '100%',
 	poster:
 		'https://images2.minutemediacdn.com/image/upload/c_crop,h_1613,w_2400,x_0,y_116/v1628703164/shape/mentalfloss/649273-youtube-rick_astley.jpg',
 });

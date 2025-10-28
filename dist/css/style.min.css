@@ -99,10 +99,40 @@ html {
 body {
   font-family: "Arial", sans-serif;
   font-size: 16px;
-  line-height: 130%;
+  line-height: normal;
   color: #BBBBBB;
   background-color: #1C1C1C;
   overflow-x: hidden;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 48px;
+}
+@media screen and (max-width: 639px) {
+  .main {
+    padding: 48px 10px;
+  }
+}
+.main h1 {
+  font-size: 48px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+@media screen and (max-width: 639px) {
+  .main h1 {
+    font-size: 24px;
+  }
+}
+
+#player {
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16/9;
 }
 
 .hello {
