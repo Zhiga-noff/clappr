@@ -60,33 +60,37 @@ body {
   display: none !important
 }
 
-.media-container {
-  position: absolute;
-  bottom: 0;
-  z-index: 10;
-  height: 160px;
-  width: 100%;
-  background:  linear-gradient(180deg,rgba(8, 9, 13, 0) 0%, rgba(8, 9, 13, 0.9) 60%);;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px !important;
+.media-custom {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    height: 160px;
+    width: 100%;
+    background:  linear-gradient(180deg,rgba(8, 9, 13, 0) 0%, rgba(8, 9, 13, 0.9) 60%);;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px !important;
+  &__description-video{
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px !important;
+    width: 100%;
+  }
+  &__play-controls {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 
-.media-controls {
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-.media-left {
-  display: flex !important;
-  align-items: center;
-}
-
-.media-right {
-display: flex !important;
+.play-controls {
+  &__left{display: flex !important;
+    align-items: center;}
+  &__right{display: flex !important;}
 }
 
 .icon {
@@ -105,7 +109,7 @@ display: flex !important;
 }
 
 .media-progress-bar {
-  width: 0%;
+  width: 0;
   height: 100%;
   background:white;
   border-radius:3px;
@@ -115,14 +119,5 @@ display: flex !important;
   font-family: 'Arial', sans-serif;
   font-size: 12px !important;
   font-weight: 300;
-
-}
-
-.top-elem {
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px !important;
-  width: 100%;
 }
 

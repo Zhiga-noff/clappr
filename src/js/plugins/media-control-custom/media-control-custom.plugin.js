@@ -28,10 +28,10 @@ export class MediaControlCustomPlugin extends Clappr.UIContainerPlugin {
 		// Создаём контейнер для кнопок
 		const container = document.createElement('div');
 		container.addEventListener('click', (e) => e.stopPropagation());
-		container.classList.add('media-container');
+		container.classList.add('media-custom');
 
 		const topElem = document.createElement('div');
-		topElem.classList.add('top-elem');
+		topElem.classList.add('media-custom__description-video');
 
 		const time = createTime(this.container);
 		const titleEl = createTitle('Это точно не то о чем ты подумал');
@@ -43,11 +43,11 @@ export class MediaControlCustomPlugin extends Clappr.UIContainerPlugin {
 
 		// Контейнер кнопок снизу
 		const controls = document.createElement('div');
-		controls.classList.add('media-controls');
+		controls.classList.add('media-custom__play-controls', 'play-controls');
 
 		// Кнопки паузы и перемотки
 		const leftControls = document.createElement('div');
-		leftControls.classList.add('media-left');
+		leftControls.classList.add('play-controls__left');
 
 		const playPause = createPlayPause(this.container);
 		const forward = createForward(this.container);
@@ -56,7 +56,7 @@ export class MediaControlCustomPlugin extends Clappr.UIContainerPlugin {
 
 		// Кнопки во весь экран и мьют
 		const rightControls = document.createElement('div');
-		rightControls.classList.add('media-right');
+		rightControls.classList.add('play-controls__right');
 
 		const fullscreen = createFullscreen(this.container);
 		const volume = createMute(this.container);
